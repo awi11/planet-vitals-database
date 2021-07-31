@@ -17,7 +17,9 @@ RUN set -ex; \
         ca-certificates \
         sudo \
 		gnupg \
+		numactl \
     ; 
+# add mongo's public key to our list of keys
 RUN wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
 
 # add location for APT
@@ -26,3 +28,9 @@ RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mon
 RUN apt-get update;
 
 RUN sudo apt-get install -y mongodb-org
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# RUN sudo systemctl start mongod

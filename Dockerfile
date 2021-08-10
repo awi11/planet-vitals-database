@@ -4,6 +4,8 @@ ENV NODE_ENV=production
 
 WORKDIR /usr/src/planet-vitals-database
 
+RUN mkdir -p /data/db
+
 # 1.) sets builtin parameters for the shell. fail fast
 # 2.) saves manually installed packages up to this point
 # 3.) install wget, say yes, do not consider recommended packages
